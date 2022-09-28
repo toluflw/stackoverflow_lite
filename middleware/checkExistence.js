@@ -1,4 +1,4 @@
-const { responseHandler } = require('./handlers');
+const { controllerResponseHandler } = require('./handlers');
 const { User } = require('../models');
 
 const checkExistence = async (req, res, next) => {
@@ -11,12 +11,11 @@ const checkExistence = async (req, res, next) => {
   })
 
   if (user) {
-    return res
-      .status(400)
-      .json(responseHandler(false, 400, 'username already exists, please choose another one', null));
+    return controllerResponseHandler(res,false, 400, 'username already exists, please choose another one', null);
   }
   } catch (error) {
     console.log(error)
+    return controllerResponseHandler(res, false, 500, 'server error')
   }
   next();
 };
