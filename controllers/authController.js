@@ -1,5 +1,5 @@
 
-const { responseHandler, asyncHandler } = require('../middleware');
+const { controllerResponseHandler, asyncHandler } = require('../middleware');
 const { usersService } = require('../services');
 
 
@@ -25,9 +25,7 @@ class AuthController{
       });
     } catch (err) {
       console.log(err);
-      return res
-        .status(500)
-        .json(responseHandler(false, 500, 'server error', null));
+      return controllerResponseHandler(res,false, 500, 'server error', null);
     }
   });
 
@@ -43,9 +41,7 @@ class AuthController{
       });
     } catch (err) {
       console.log(err);
-      return res
-        .status(500)
-        .json(responseHandler(true, 500, 'server error', null));
+      return controllerResponseHandler(res,true, 500, 'server error', null);
     }
   });
 
