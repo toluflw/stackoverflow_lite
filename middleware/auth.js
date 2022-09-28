@@ -11,7 +11,7 @@ const auth = (req, res, next) => {
   if (!token) {
     return res
       .status(401)
-      .json(responseHandler(false, 401, 'sign-in required', null));
+      .json(responseHandler(false, 401, 'authorization token is required', null));
   }
   
 
@@ -21,7 +21,7 @@ const auth = (req, res, next) => {
       if (error) {
         return res
           .status(400)
-          .json(responseHandler(false, 400, 'try again', null));
+          .json(responseHandler(false, 400, 'invalid token', null));
       }
       req.user = decoded.user;
       next();

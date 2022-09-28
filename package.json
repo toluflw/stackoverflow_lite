@@ -5,7 +5,10 @@
   "main": "app.js",
   "scripts": {
     "devStart": "nodemon app.js",
-    "test": "nyc --reporter=lcov --reporter=text --reporter=text-summary mocha \"./test/**/*.js\" --timeout 12000 --exit"
+    "test": "NODE_ENV=test nyc --reporter=lcov --reporter=text --reporter=text-summary mocha \"./test/**/*.js\" --timeout 12000 --exit",
+    "migrateup":"sequelize db:migrate",
+    "migratedown":"sequelize db:migrate:undo:all",
+    "pretest":"NODE_ENV=test npm run migratedown && NODE_ENV=test npm run migrateup"
   },
   "author": "tolu sola-adeyemi",
   "license": "ISC",

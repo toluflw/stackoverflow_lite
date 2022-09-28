@@ -1,6 +1,7 @@
 const express = require('express');
 const { usersController } = require('../controllers');
 const { checkExistence } = require('../middleware');
+const { createUserValidator } = require('../validator/validator');
 
 const router = express.Router();
 
@@ -8,6 +9,6 @@ const router = express.Router();
  *  @desc       register a new user
  */
 router.route('/')
-  .post(checkExistence, usersController.register);
+  .post(createUserValidator, checkExistence, usersController.register);
 
 module.exports = router;

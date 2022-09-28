@@ -1,6 +1,7 @@
 require('dotenv').config();
 const bcrypt = require('bcrypt');
-const { getJwtToken, responseHandler, schema } = require('../middleware');
+const { responseHandler, errorHandler } = require('../middleware');
+const utils = require('../utils')
 
 const { User } = require('../models');
 
@@ -9,37 +10,32 @@ const { User } = require('../models');
  */
 
 class UsersService{
-  static register = async (newUser, result) => {
+  static register = async (newUser) => {
     const salt = await bcrypt.genSalt(10);
-
   
-    const value = await schema.validateAsync(newUser)
-      .catch((error) => {
-      console.log(error.message);
-      return result(responseHandler(false, error.statusCode, error.message, null), null);
-  });
-    
-    
-    value.password = await bcrypt.hash(value.password, salt);
+    newUser.password = await bcrypt.hash(newUser.password, salt);
     const insertObj = await User
     .create(
       {
-          username: value.username,
-          password: value.password,
+          username: newUser.username,
+          password: newUser.password,
       }
       )
-      .catch((error) => {
-          console.log(error.message);
-          return result(responseHandler(false, error.statusCode, error.message, null), null);
-        });
 
-    const payload = {
+    const jwtPayload = {
       user: {
         id: insertObj.dataValues.id,
       },
     };
 
-    getJwtToken(payload, 'user registered', result);
+    utils.getJwtToken(jwtPayload, 'user registered');
+
+    const payload = {
+      user: {
+        username: insertObj.dataValues.username,
+        created_at: insertObj.dataValues.createdAt,
+      },
+    };
 
     return payload;
   };
@@ -50,37 +46,29 @@ class UsersService{
         where: {username:  newUser.username},
       })
       
-      if (user === null) {
-        result(
-          responseHandler(
-            false,
-            404,
-            'user does not exist',
-            null,
-          ),
-          null,
-        );
-        return null;
+      if (!user) {
+        result(responseHandler(false, 404, 'user does not exist', null), null);
       }
     
       const isMatch = await bcrypt.compare(newUser.password, user.password);
     
       if (!isMatch) {
-        result(
-          responseHandler(false, 400, 'incorrect password', null),
-          null,
-        );
-    
-        return null;
+        result(responseHandler(false, 400, 'incorrect password', null), null);
       }
     
-      const payload = {
+      const jwtPayload = {
         user: {
           id: user.id,
         },
       };
-    
-      getJwtToken(payload, 'user logged in', result);
+
+      utils.getJwtToken(jwtPayload, 'user logged in', result);
+      
+      const payload = {
+        user: {
+          username: user.username,
+        },
+      };
     
       return payload;
     };

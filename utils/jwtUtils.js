@@ -1,4 +1,4 @@
-const { responseHandler } = require('./handlers');
+const { errorHandler, responseHandler, controllerResponseHandler } = require('../middleware');
 const jwt = require('jsonwebtoken');
 
 const getJwtToken = (payload, logMessage, result) => {
@@ -9,11 +9,10 @@ const getJwtToken = (payload, logMessage, result) => {
       (error, token) => {
         if (error) {
           console.log('error: ', error);
-          return result(responseHandler(false, error.statusCode, error.message, null), null);
+          return errorHandler(false, error.statusCode, error.message, null);
         }
-  
         return result(null, responseHandler(true, 200, logMessage, { token }));
-      },
+      }
     );
   };
 
