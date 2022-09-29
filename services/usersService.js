@@ -1,6 +1,7 @@
 require('dotenv').config();
 const bcrypt = require('bcrypt');
-const { responseHandler, errorHandler } = require('../middleware');
+const { responseHandler } = require('../middleware');
+
 const utils = require('../utils')
 
 const { User } = require('../models');
@@ -22,14 +23,6 @@ class UsersService{
       }
       )
 
-    const jwtPayload = {
-      user: {
-        id: insertObj.dataValues.id,
-      },
-    };
-
-    utils.getJwtToken(jwtPayload, 'user registered');
-
     const payload = {
       user: {
         username: insertObj.dataValues.username,
@@ -40,42 +33,41 @@ class UsersService{
     return payload;
   };
 
-  static login = async (newUser, result) => {
+
+
+  static login = async (newUser) => {
       const user = await User
       .findOne({
         where: {username:  newUser.username},
       })
       
       if (!user) {
-        result(responseHandler(false, 404, 'user does not exist', null), null);
+        throw responseHandler(false, 404, 'user does not exist', null);
       }
     
       const isMatch = await bcrypt.compare(newUser.password, user.password);
     
       if (!isMatch) {
-        result(responseHandler(false, 400, 'incorrect password', null), null);
+        throw responseHandler(false, 400, 'incorrect password', null);
       }
     
       const jwtPayload = {
-        user: {
           id: user.id,
-        },
       };
 
-      utils.getJwtToken(jwtPayload, 'user logged in', result);
+      const token = utils.getJwtToken(jwtPayload);
       
       const payload = {
-        user: {
           username: user.username,
-        },
+          token
       };
-    
+
       return payload;
     };
 
  static loadUser = async (userId, result) => {
     const response = await User.findOne({ where: { id: userId} }, result);
-    result(null, responseHandler(true, 200, 'Success', `logged in as: ${response.username}`));
+     return response;
   };
 
 }
