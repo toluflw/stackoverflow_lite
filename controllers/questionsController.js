@@ -80,6 +80,15 @@ class QuestionsController{
         }
       });
 
+      static questionSearch = asyncHandler(async (req, res) => {
+        try {
+            const data = await questionsService.questionSearch(req.query.q)
+            return controllerResponseHandler(res,true, 200, 'success', data);
+        } catch (err) {
+            console.log(err);
+            return errorHandler(err, req, res);
+        }
+        });
 }
 
 module.exports = QuestionsController;

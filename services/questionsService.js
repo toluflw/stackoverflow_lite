@@ -3,6 +3,7 @@ const { responseHandler } = require('../middleware');
 const utils = require('../utils');
 
 const { Question, User, Answer, sequelize } = require('../models');
+const Op = sequelize.Op;
 
 /**
  * @class Questions Services (logic)
@@ -276,7 +277,7 @@ class QuestionsService{
 
 }
 
-static questionSearch = async (searchQuery, result) => {
+static questionSearch = async (searchQuery) => {
     const questions = await Question
       .findAll({
         where: {
