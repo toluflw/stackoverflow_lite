@@ -27,7 +27,8 @@ const checkOwnership = async (req, res, next) => {
         .json(responseHandler(false, 500, 'something went wrong', null));
     });
 
-  if (user === null) {
+
+  if (!user) {
     return res
       .status(404)
       .json(responseHandler(false, 404, 'user doesn\'t exist', null));
