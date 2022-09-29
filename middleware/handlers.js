@@ -9,6 +9,7 @@
 
 
   const controllerResponseHandler = (res, success, code, message, data) => {
+    console.log(data, 'controller here')
      res.status(code).json({ 
       success,
       code,
@@ -25,12 +26,15 @@
   });
   
 
-  const errorHandler = (success, code, message, data) => ({
-     success,
-     code,
-     message,
-     data,
-  })
+  const errorHandler = (err, req, res) => {
+    console.log('error handler', err)
+    res.status(err.code || 500).json({
+      success: false,
+      code: err.code || 500,
+      message: err.message || 'server error',
+      data: null,
+    });
+  };
  ;
 
 

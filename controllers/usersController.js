@@ -1,5 +1,5 @@
 const { usersService } = require('../services');
-const { controllerResponseHandler, asyncHandler } = require('../middleware');
+const { controllerResponseHandler, asyncHandler, errorHandler } = require('../middleware');
 
 
 /**
@@ -9,12 +9,31 @@ const { controllerResponseHandler, asyncHandler } = require('../middleware');
 class UsersController{       
   static register = asyncHandler(async (req, res) => {
     try {
-      // Register user in the database
         const data = await usersService.register(req.body)
         return controllerResponseHandler(res,true, 201, 'user succesfully registered', data);
     } catch (err) {
       console.log(err);
-      return controllerResponseHandler(res,false, err.statusCode, err.message, null);
+      return errorHandler(err, req, res);
+    }
+  });
+
+  static loadUser = asyncHandler(async (req, res) => {
+    try {
+      const data = await usersService.loadUser(req.user.id)
+      return controllerResponseHandler(res,true, 200, 'success', `logged in as ${data.username}`);
+    } catch (err) {
+      console.log(err);
+      return errorHandler(err,req,res);
+    }
+  });
+
+  static login = asyncHandler(async (req, res) => {
+    try {
+      const data = await usersService.login(req.body)
+      return controllerResponseHandler(res,true, 200, 'user logged in', data);
+    }catch (err) {
+      console.log(err);
+      return errorHandler(err, req, res);
     }
   });
 
