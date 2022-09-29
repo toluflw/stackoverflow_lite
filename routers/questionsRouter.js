@@ -37,7 +37,7 @@ router.post('/', auth, createQuestionValidator, questionsController.askQuestion)
 router.delete('/:id', auth, checkOwnership, questionsController.deleteQuestion);
 
 /** @route      GET /api/v1/posts/search
- *  @desc       delete a question (a user can only delete his/her own question)
+ *  @desc       a user can search for a specific question
  */
  router.get('/search', questionsController.questionSearch);
 
