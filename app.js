@@ -26,7 +26,7 @@ app.all('*', (req, res) => {
 //creates tables in the db from the models i.e syncs them
 
 const PORT = process.env.PORT || 5000;
-app.listen({ PORT }, async () =>{
+app.listen({ port: PORT }, async () =>{
     console.log(`server up on ${PORT}`)
     await sequelize.authenticate()
     console.log('database connected')
