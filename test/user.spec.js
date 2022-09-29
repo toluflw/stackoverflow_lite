@@ -56,6 +56,7 @@ describe('user tests', () => {
 })
 });
 
+
 describe('auth tests', () => {
   describe('successes', () =>{
     it('should login a valid user succesfully', (done) => {
@@ -122,4 +123,5 @@ describe('auth tests', () => {
 })
 })
 });
+
   

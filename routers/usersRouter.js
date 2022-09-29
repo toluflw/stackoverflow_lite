@@ -8,6 +8,7 @@ const router = express.Router();
 /** @route      POST /api/v1/users/
  *  @desc       register a new user
  */
+ 
 router.post('/', createUserValidator, checkExistence, usersController.register);
 
 /** @route      GET /api/v1/users/load
@@ -19,5 +20,6 @@ router.post('/', createUserValidator, checkExistence, usersController.register);
 *  @desc       log in user
 */
 router.post('/login', usersController.login);
+
 
 module.exports = router;

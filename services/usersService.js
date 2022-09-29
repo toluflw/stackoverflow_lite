@@ -1,6 +1,7 @@
 require('dotenv').config();
 const bcrypt = require('bcrypt');
 const { responseHandler } = require('../middleware');
+
 const utils = require('../utils')
 
 const { User } = require('../models');
@@ -21,7 +22,7 @@ class UsersService{
           password: newUser.password,
       }
       )
-      
+
     const payload = {
       user: {
         username: insertObj.dataValues.username,
@@ -32,11 +33,14 @@ class UsersService{
     return payload;
   };
 
+
+
   static login = async (newUser) => {
       const user = await User
       .findOne({
         where: {username:  newUser.username},
       })
+      
       if (!user) {
         throw responseHandler(false, 404, 'user does not exist', null);
       }

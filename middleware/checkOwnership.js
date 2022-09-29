@@ -15,7 +15,6 @@ const checkOwnership = async (req, res, next) => {
     next();
   }
 
-  
   const user = await Model
     .findOne({
       where: { id: req.params.id },
@@ -27,6 +26,7 @@ const checkOwnership = async (req, res, next) => {
         .status(500)
         .json(responseHandler(false, 500, 'something went wrong', null));
     });
+
 
   if (!user) {
     return res

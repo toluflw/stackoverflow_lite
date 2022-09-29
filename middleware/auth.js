@@ -1,4 +1,5 @@
 require('dotenv').config();
+
 const { responseHandler, controllerResponseHandler } = require('./handlers');
 const JWT = require('jsonwebtoken');
 
@@ -7,7 +8,7 @@ const auth = (req, res, next) => {
     const authHeader = req.headers.authorization;
     const token = authHeader && authHeader.split(' ')[1];
 
-  
+
   // Verify token
   try {
     if (!token) {
@@ -23,6 +24,7 @@ const auth = (req, res, next) => {
   } catch (err) {
     console.error(`error: ${err}`);
     return controllerResponseHandler(res,false, err.statusCode, err.message, null);
+
   }
 };
 
