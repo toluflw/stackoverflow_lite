@@ -15,6 +15,7 @@ const controllerResponseHandler = (res, success, code, message, data) => {
     code,
     message,
     data,
+
   })
 };
 
@@ -44,3 +45,4 @@ module.exports = {
   errorHandler,
   controllerResponseHandler
 };
+

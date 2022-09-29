@@ -34,7 +34,6 @@ class UsersService{
   };
 
 
-
   static login = async (newUser) => {
       const user = await User
       .findOne({
@@ -67,6 +66,7 @@ class UsersService{
 
  static loadUser = async (userId, result) => {
     const response = await User.findOne({ where: { id: userId} }, result);
+
      return response;
   };
 

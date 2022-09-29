@@ -8,7 +8,6 @@ const router = express.Router();
 /** @route      POST /api/v1/users/
  *  @desc       register a new user
  */
- 
 router.post('/', createUserValidator, checkExistence, usersController.register);
 
 /** @route      GET /api/v1/users/load
