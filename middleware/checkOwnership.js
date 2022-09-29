@@ -35,7 +35,6 @@ const checkOwnership = async (req, res, next) => {
   }
 
   if (user.userId !== req.user.id) {
-    console.log('error: user not authorized to delete this post');
     return res.json(
       responseHandler(
         false,
