@@ -9,7 +9,6 @@
 
 
 const controllerResponseHandler = (res, success, code, message, data) => {
-  console.log(data, 'controller here')
    res.status(code).json({ 
     success,
     code,
