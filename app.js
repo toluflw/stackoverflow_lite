@@ -16,6 +16,12 @@ app.all('*', (req, res) => {
     });
   });
 
+  app.get('/',(req,res)=>{
+    return res.status(200).json({
+      message: 'stack_lite API',
+    })
+  })
+
 
 //creates tables in the db from the models i.e syncs them
 
