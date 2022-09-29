@@ -145,7 +145,7 @@ it('should return errors if user is not logged in and tries to ask a question', 
       expect(res.body).to.be.an('object').that.has.keys(['success', 'code', 'message','data']);
       expect(res.body.success).to.be.equal(false);
       expect(res.body.code).to.be.equal(401);
-      expect(res.body.message).to.be.equal('authorization token is required');
+      expect(res.body.message).to.be.equal('user must be logged in');
       expect(res.body.data).to.be.equal(null);
       done();
     });
