@@ -4,6 +4,7 @@ const app = require('../app');
 
 const expect = chai.expect;
 
+
 describe('votes tests', () => {
   describe('successes', () =>{
     it('should let an authenticated user upvote succesfully', (done) => {
