@@ -17,7 +17,10 @@ module.exports = {
     dialect: 'mysql'
   },
   production: {
-    use_env_variable: process.env.DATABASE_URL,
+    username: process.env.DB_USERNAME,
+    password: process.env.DB_PWD,
+    database: process.env.DB_TESTDB,
+    host: process.env.DB_HOST,
     dialect: 'mysql',
     dialectOptions: {
       ssl: {
