@@ -15,8 +15,8 @@ if (config.use_env_variable) {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 if (env === 'production') {
-  const { DATABASE_URL } = process.env;
-  const dbUrl = url.parse(DATABASE_URL);
+  const { CLEARDB_DATABASE_URL } = process.env;
+  const dbUrl = url.parse(CLEARDB_DATABASE_URL);
   const username = dbUrl.auth.substr(0, dbUrl.auth.indexOf(':'));
   const password = dbUrl.auth.substr(
     dbUrl.auth.indexOf(':') + 1,
