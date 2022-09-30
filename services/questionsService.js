@@ -34,6 +34,7 @@ class QuestionsService{
         const query = {
             distinct: true,
             attributes: [
+            'id',
             'uuid',
             [sequelize.literal('User.username'), 'username'],
             'createdAt',
@@ -61,6 +62,7 @@ class QuestionsService{
         
           const postsMap = posts.map((post) => utils.array.sequelizeResponse(
             post,
+            'id',
             'uuid',
             'title',
             'body',

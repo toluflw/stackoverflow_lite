@@ -15,10 +15,6 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(Comment, {foreignKey: 'userId'})
       this.hasMany(Vote, {foreignKey: 'userId'})
     }
-
-    toJSON(){
-      return {...this.get(), id: undefined}
-    }
   }
   User.init(
     {
