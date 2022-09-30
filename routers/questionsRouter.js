@@ -39,6 +39,6 @@ router.delete('/:id', auth, checkOwnership, questionsController.deleteQuestion);
 /** @route      GET /api/v1/posts/search
  *  @desc       a user can search for a specific question
  */
- router.get('/search', questionsController.questionSearch);
+ router.get('/post/search', questionsController.questionSearch);
 
 module.exports = router;

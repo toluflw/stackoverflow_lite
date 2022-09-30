@@ -1,9 +1,9 @@
-
+const Sequelize = require('sequelize');
 const { responseHandler } = require('../middleware');
 const utils = require('../utils');
 
 const { Question, User, Answer, sequelize } = require('../models');
-const Op = sequelize.Op;
+const Op = Sequelize.Op;
 
 /**
  * @class Questions Services (logic)
@@ -149,8 +149,6 @@ class QuestionsService{
             console.log(error);
             throw new Error(`we were unable to delete your post: ${error}`);
         });
-
-        return responseHandler(true, 200, 'post removed', null);
     }
 )};
 
@@ -282,7 +280,7 @@ static questionSearch = async (searchQuery) => {
       .findAll({
         where: {
           title : {
-            [Op.like]: '%' + searchQuery + '%'
+            [Op.like]: `%${searchQuery}%`
           }
         }
       })

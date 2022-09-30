@@ -56,13 +56,8 @@ class QuestionsController{
 
     static deleteQuestion = asyncHandler(async (req, res) => {
         try {
-          await questionsService.deleteQuestion(req.params.id, (err, data) => {
-            if (err) {
-              console.log(err);
-              return res.status(err.code).json(err);
-            }
-            return res.status(data.code).json(data);
-          });
+          await questionsService.deleteQuestion(req.params.id)
+          return controllerResponseHandler(res,true, 200, 'post deleted', null);
         } catch (err) {
           console.log(err);
           return errorHandler(err, req, res);
