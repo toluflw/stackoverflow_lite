@@ -4,7 +4,7 @@ stackoverflow_lite is a platform where users can ask and answer questions as wel
 
 this api was built using nodejs/express, mysql/sequelize, chai/mocha for testing and es-lint.
 
-# Installation
+# installation
 - clone this repo
   ```node
   git clone https://github.com/toluflw/stackoverflow_lite.git
@@ -23,6 +23,12 @@ this api was built using nodejs/express, mysql/sequelize, chai/mocha for testing
   ```node
   npm run devStart (the dev environment start script uses nodemon)
   ```
+  
+# testing
+- you can run the test suites for this app (ensure to provision a test db)
+  ```node
+  npm run test
+  ``` 
   
 # live demo
   https://stackoverflowlite-flw.herokuapp.com
