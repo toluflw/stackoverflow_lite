@@ -9,11 +9,6 @@ const config = require(__dirname + '/../config/config.js')[env];
 const db = {};
 
 let sequelize;
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
-} else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
-}
 if (env === 'production') {
   const { DATABASE_URL } = process.env;
   const dbUrl = url.parse(DATABASE_URL);
@@ -28,6 +23,8 @@ if (env === 'production') {
   config.host = host;
   config.port = port;
   sequelize = new Sequelize(dbName, username, password, config);
+}else {
+  sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 
 fs
