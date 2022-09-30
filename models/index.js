@@ -9,9 +9,14 @@ const config = require(__dirname + '/../config/config.js')[env];
 const db = {};
 
 let sequelize;
+if (config.use_env_variable) {
+  sequelize = new Sequelize(process.env[config.use_env_variable], config);
+} else {
+  sequelize = new Sequelize(config.database, config.username, config.password, config);
+}
 if (env === 'production') {
-  const { CLEARDB_DATABASE_URL } = process.env;
-  const dbUrl = url.parse(CLEARDB_DATABASE_URL);
+  const { DATABASE_URL } = process.env;
+  const dbUrl = url.parse(DATABASE_URL);
   const username = dbUrl.auth.substr(0, dbUrl.auth.indexOf(':'));
   const password = dbUrl.auth.substr(
     dbUrl.auth.indexOf(':') + 1,
@@ -23,8 +28,6 @@ if (env === 'production') {
   config.host = host;
   config.port = port;
   sequelize = new Sequelize(dbName, username, password, config);
-}else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 
 fs
