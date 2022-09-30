@@ -433,7 +433,7 @@ lets an authenticated user vote on an answer (auth header required). returns suc
 curl --location --request POST 'https://stackoverflowlite-flw.herokuapp.com/api/v1/posts/answers/votes/15' \
 --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWF0IjoxNjY0NTMyNjg4LCJleHAiOjE2NjcxMjQ2ODh9.jfZwfz4ou7YpTO1FXhM' \
 --data-raw '{
-    "vote_type":"down"
+    "vote_type":"up"
 }'
 ```
 ### response
