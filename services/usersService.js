@@ -57,7 +57,7 @@ class UsersService{
       const token = utils.getJwtToken(jwtPayload);
       
       const payload = {
-          id: user,id,
+          id: user.id,
           username: user.username,
           token
       };
