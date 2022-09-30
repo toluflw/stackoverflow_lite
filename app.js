@@ -9,7 +9,13 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/v1/', index);
 
-//catches all unassigned routes
+
+app.get('/',(req,res)=>{
+  return res.status(200).json({
+    message: 'stack_lite API',
+  })
+})
+
 app.all('*', (req, res) => {
     res.status(404).json({
       status: 'error',
@@ -17,14 +23,6 @@ app.all('*', (req, res) => {
     });
   });
 
-  app.get('/',(req,res)=>{
-    return res.status(200).json({
-      message: 'stack_lite API',
-    })
-  })
-
-
-//creates tables in the db from the models i.e syncs them
 
 const PORT = process.env.PORT || 5000;
 app.listen({ port: PORT }, async () =>{
