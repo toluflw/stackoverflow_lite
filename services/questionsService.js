@@ -1,3 +1,4 @@
+
 const Sequelize = require('sequelize');
 const { responseHandler } = require('../middleware');
 const utils = require('../utils');

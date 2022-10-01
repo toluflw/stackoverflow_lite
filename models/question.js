@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       this.belongsTo(User, { foreignKey: 'userId'})
     }
+
   }
   Question.init({
     uuid:{
