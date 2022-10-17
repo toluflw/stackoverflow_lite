@@ -31,7 +31,7 @@ Object.keys(db).forEach(modelName => {
   }
 });
 
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
+db.sequelize = sequelize; //instance
+db.Sequelize = Sequelize; //library
 
 module.exports = db;
