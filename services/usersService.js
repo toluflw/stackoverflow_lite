@@ -15,8 +15,7 @@ class UsersService{
     const salt = await bcrypt.genSalt(10);
   
     newUser.password = await bcrypt.hash(newUser.password, salt);
-    const insertObj = await User
-    .create(
+    const insertObj = await User.create(
       {
           username: newUser.username,
           password: newUser.password,
