@@ -47,9 +47,9 @@ const vschema = Joi.object({
 });
 
 
-const createUserValidator = async (req, res, next) => {
+const createUserValidator = (req, res, next) => {
     try {
-        const value = await schema.validateAsync(req.body)
+        const value = schema.validate(req.body).value;
         req.body = value;
         next();
     } catch (error) {
@@ -58,9 +58,9 @@ const createUserValidator = async (req, res, next) => {
     }
 }
 
-const createQuestionValidator = async(req, res, next) => {
+const createQuestionValidator = (req, res, next) => {
     try {
-            const value = await qschema.validateAsync(req.body)
+            const value = qschema.validate(req.body).value;
             req.body = value;
             next();
     } catch (error) {
@@ -69,9 +69,9 @@ const createQuestionValidator = async(req, res, next) => {
     }
 }
 
-const createVoteValidator = async(req, res, next) => {
+const createVoteValidator = (req, res, next) => {
     try {
-        const value = await vschema.validateAsync(req.body)
+        const value =  vschema.validate(req.body).value;
           req.body = value;
           next();
     } catch (error) {
@@ -80,9 +80,9 @@ const createVoteValidator = async(req, res, next) => {
     }
 }
 
-const createAnswerValidator = async(req, res, next) => {
+const createAnswerValidator = (req, res, next) => {
     try {
-        const value = await aschema.validateAsync(req.body)
+        const value = aschema.validate(req.body).value;
           req.body = value;
           next();
     } catch (error) {
@@ -91,9 +91,9 @@ const createAnswerValidator = async(req, res, next) => {
     }
 }
 
-const createCommentValidator = async(req, res, next) => {
+const createCommentValidator = (req, res, next) => {
     try {
-        const value = await cschema.validateAsync(req.body)
+        const value =  cschema.validate(req.body).value;
           req.body = value;
           next();
     } catch (error) {
