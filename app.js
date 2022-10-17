@@ -25,6 +25,13 @@ app.use((err, req, res, next) => {
   }
 });
 
+
+app.get('/',(req,res)=>{
+  return res.status(200).json({
+    message: 'stack_lite API',
+  })
+})
+
 //catches all unassigned routes
 app.all('*', (req, res) => {
     res.status(404).json({

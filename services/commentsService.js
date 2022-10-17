@@ -35,6 +35,7 @@ class CommentsService {
                 answerId,
                 },
                 attributes: [
+                'id',
                 'uuid',
                 'answerId',
                 'body',
@@ -52,6 +53,7 @@ class CommentsService {
         
         const queryResultMap = queryResult.map((comment) => utils.array.sequelizeResponse(
             comment,
+            'id',
             'uuid',
             'answerId',
             'body',

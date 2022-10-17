@@ -18,7 +18,7 @@ const auth = (req, res, next) => {
       if (error) {
         return controllerResponseHandler(res,false, 400, 'invalid token', null);
       }
-      req.user = decoded.user;
+      req.user = decoded;
       next();
     });
   } catch (err) {
